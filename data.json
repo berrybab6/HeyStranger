@@ -7,6 +7,10 @@
             "username":"hey1",
             "first_name":"mish",
             "last_name":"assefa",
+            "last_login": null,
+            "is_superuser": false,
+            "is_staff": false,
+            "is_active": true,
             "email":"mishassefa@gmail.com",
             "profile_url":"https://google.com"            
         }
@@ -20,10 +24,26 @@
             "username":"hey2",
             "first_name":"betty",
             "last_name":"arega",
+            "last_login": null,
+            "is_superuser": false,
+            "is_staff": false,
+            "is_active": true,
             "email":"bettyarega@gmail.com",
             "profile_url":"https://google.com"            
         }
+        
+    
 
+    },
+    {
+        "model": "graphql_auth.userstatus",
+        "pk": 1,
+        "fields": {
+            "user": 1,
+            "verified": true,
+            "archived": true,
+            "secondary_email": null
+        }
     }
 ]
 

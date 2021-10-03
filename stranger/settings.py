@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'api.apps.ApiConfig',
     'django_filters',
     'graphene_django',
+    'graphql_auth',
     'graphql_jwt.refresh_token.apps.RefreshTokenConfig',
 
 ]

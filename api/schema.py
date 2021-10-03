@@ -6,10 +6,10 @@ from .models import Users
 from graphql_auth.schema import UserQuery, MeQuery
 
 
-class UserType(DjangoObjectType):
-    class Meta:
-        model = Users
-        fields = "__all__"
+# class UserType(DjangoObjectType):
+#     class Meta:
+#         model = Users
+#         fields = "__all__"
         #   (  'id',
         #     'password',
         #     'last_login',
