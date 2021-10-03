@@ -1,0 +1,16 @@
+[
+    {
+        "model":"api.Users",
+        "id":1,
+        "fields":{
+            "password":"hey1",
+            "username":"hey1",
+            "first_name":"mish",
+            "last_name":"assefa",
+            "email":"mishassefa@gmail.com",
+            "profile_url":"https://google.com"            
+        }
+
+    }
+]
+
