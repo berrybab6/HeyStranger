@@ -11,6 +11,19 @@
             "profile_url":"https://google.com"            
         }
 
+    },
+    {
+        "model":"api.Users",
+        "id":2,
+        "fields":{
+            "password":"hey2",
+            "username":"hey2",
+            "first_name":"betty",
+            "last_name":"arega",
+            "email":"bettyarega@gmail.com",
+            "profile_url":"https://google.com"            
+        }
+
     }
 ]
 
