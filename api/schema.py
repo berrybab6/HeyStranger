@@ -1,7 +1,9 @@
 import graphene
 from django.db.models import query
+from graphene.types.objecttype import ObjectType
 from graphene_django import DjangoObjectType
 from .models import Users
+from graphql_auth import mutations
 
 from graphql_auth.schema import UserQuery, MeQuery
 
@@ -35,7 +37,11 @@ from graphql_auth.schema import UserQuery, MeQuery
 #         return Users.objects.all()
 #     def resolve_user(self, info, user_id):
 #         return Users.objects.get(id=user_id)
+class AuthMutation(graphene.ObjectType):
+    register = mutations.Register.Field()
+    
 class Query(UserQuery, MeQuery, graphene.ObjectType):
     pass
-    
-schema = graphene.Schema(query=Query)
+class Mutation(AuthMutation, graphene.ObjectType):
+    pass    
+schema = graphene.Schema(query=Query, mutation=Mutation)
