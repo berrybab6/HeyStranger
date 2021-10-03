@@ -3,6 +3,8 @@ from django.db.models import query
 from graphene_django import DjangoObjectType
 from .models import Users
 
+from graphql_auth.schema import UserQuery, MeQuery
+
 
 class UserType(DjangoObjectType):
     class Meta:
@@ -25,13 +27,15 @@ class UserType(DjangoObjectType):
         # )        
             
 
-class Query(graphene.ObjectType):
-    users = graphene.List(UserType)
-    user = graphene.Field(UserType, user_id=graphene.Int())
+# class Query(graphene.ObjectType):
+#     users = graphene.List(UserType)
+#     user = graphene.Field(UserType, user_id=graphene.Int())
 
-    def resolve_users(self, info, **kwargs):
-        return Users.objects.all()
-    def resolve_user(self, info, user_id):
-        return Users.objects.get(id=user_id)
+#     def resolve_users(self, info, **kwargs):
+#         return Users.objects.all()
+#     def resolve_user(self, info, user_id):
+#         return Users.objects.get(id=user_id)
+class Query(UserQuery, MeQuery, graphene.ObjectType):
+    pass
     
 schema = graphene.Schema(query=Query)
