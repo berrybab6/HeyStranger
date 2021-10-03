@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'graphene_django',
 ]
 
+AUTH_USER_MODEL = 'api.Users'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
