@@ -2,7 +2,7 @@ import graphene
 from django.db.models import query
 from graphene.types.objecttype import ObjectType
 from graphene_django import DjangoObjectType
-from .models import Users
+from .models import Secret, Users
 from graphql_auth import mutations
 
 from graphql_auth.schema import UserQuery, MeQuery
@@ -43,8 +43,21 @@ class AuthMutation(graphene.ObjectType):
     token_auth = mutations.ObtainJSONWebToken.Field()
     update_account = mutations.UpdateAccount.Field()
 
+
+class SecretType(DjangoObjectType):
+    class Meta:
+        model = Secret
+        fields = "__all__"
+
 class Query(UserQuery, MeQuery, graphene.ObjectType):
-    pass
+    secrets = graphene.List(SecretType)
+    secret = graphene.Field(SecretType, secret_id = graphene.Int())
+
+    def resolve_secrets(self, info, **kwargs):
+        return Secret.objects.all()
+    def resolve_secret(self, info, secret_id):
+        return Secret.objects.get(id=secret_id)
+        
 class Mutation(AuthMutation, graphene.ObjectType):
     pass    
 schema = graphene.Schema(query=Query, mutation=Mutation)

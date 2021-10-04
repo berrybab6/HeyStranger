@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.db.models.deletion import CASCADE
 
 # Create your models here.
 class Users(AbstractUser):
@@ -10,3 +11,17 @@ class Users(AbstractUser):
 
     def __str__(self):
         return self.email
+class Comment(models.Model):
+    description = models.CharField(max_length=526, null=True)
+    like = models.IntegerField(default=0)
+    dislike = models.IntegerField(default=0)
+    user = models.ForeignKey(Users, on_delete=models.CASCADE)
+    posted_on = models.DateField(auto_now_add=True)
+class Secret(models.Model):
+    title = models.CharField(max_length=100)
+    description = models.CharField(max_length=526, null=True, blank=True)
+    user = models.ForeignKey(Users, on_delete=models.CASCADE)
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE, null=True)
+    posted_on = models.DateField(auto_now=True)
+    like = models.IntegerField(default=0)
+    share = models.IntegerField(default=0)

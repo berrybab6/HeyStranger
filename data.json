@@ -44,6 +44,27 @@
             "archived": true,
             "secondary_email": null
         }
+    },
+    {
+        "model":"api.Secret",
+        "pk":1,
+        "fields":{
+            "title":"bully",
+            "description":"I have been bullied my whole life",
+            "user":1,
+            "posted_on":"2021-10-01"
+        }
+    },
+
+    {
+        "model":"api.Secret",
+        "pk":2,
+        "fields":{
+            "title":"Hated",
+            "description":"I feel like everyone around me hates me",
+            "user":1,
+            "posted_on":"2021-09-12"
+        }
     }
 ]
 
