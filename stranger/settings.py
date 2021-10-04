@@ -154,4 +154,6 @@ GRAPHQL_JWT = {
     ],
     # optional
     "JWT_LONG_RUNNING_REFRESH_TOKEN": True,
+    # 'JWT_EXPIRATION_DELTA': timedelta(seconds=60 * 10)
+
 }
