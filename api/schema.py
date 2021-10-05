@@ -42,6 +42,9 @@ class AuthMutation(graphene.ObjectType):
     verify_account = mutations.VerifyAccount.Field()
     token_auth = mutations.ObtainJSONWebToken.Field()
     update_account = mutations.UpdateAccount.Field()
+    delete_account = mutations.DeleteAccount.Field()
+    password_change = mutations.PasswordChange.Field()
+
 
 
 class SecretType(DjangoObjectType):
