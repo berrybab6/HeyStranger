@@ -57,7 +57,34 @@ class Query(UserQuery, MeQuery, graphene.ObjectType):
         return Secret.objects.all()
     def resolve_secret(self, info, secret_id):
         return Secret.objects.get(id=secret_id)
-        
+class SecretInputType(graphene.InputObjectType):
+    id = graphene.Int()
+    title = graphene.String()
+    description = graphene.String()
+    postedOn = graphene.DateTime()
+class CreateSecret(graphene.Mutation):  
+    id = graphene.Int()
+    title = graphene.String()
+    description = graphene.String()
+    postedOn = graphene.DateTime()
+    class Arguments:
+        title = graphene.String()
+        description = graphene.String()
+       
+        postedOn = graphene.Date()
+        # secret_data = SecretInputType(required=True)
+    # secret = graphene.Field(SecretType)
+
+    @staticmethod
+    def mutate(self, info, title, description,user, postedOn,secret_data=None, ):
+        user = Users.objects.get(id=1)
+        secret_inistance = Secret(title=title,user=user, description=description, posted_on=postedOn)
+        secret_inistance.save()
+        return CreateSecret(id=secret_inistance.id,user=secret_inistance.user, title=secret_inistance.title, description=secret_inistance.description)
+       
+      
+
 class Mutation(AuthMutation, graphene.ObjectType):
-    pass    
+   create_secret = CreateSecret.Field()
+
 schema = graphene.Schema(query=Query, mutation=Mutation)
