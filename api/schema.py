@@ -39,12 +39,13 @@ from graphql_auth.schema import UserQuery, MeQuery
 #         return Users.objects.get(id=user_id)
 class AuthMutation(graphene.ObjectType):
     register = mutations.Register.Field()
+    password_reset = mutations.PasswordReset.Field()
     verify_account = mutations.VerifyAccount.Field()
     token_auth = mutations.ObtainJSONWebToken.Field()
     update_account = mutations.UpdateAccount.Field()
     delete_account = mutations.DeleteAccount.Field()
     password_change = mutations.PasswordChange.Field()
-
+    send_password_reset_email = mutations.SendPasswordResetEmail.Field()
 
 
 class SecretType(DjangoObjectType):
@@ -57,7 +58,10 @@ class Query(UserQuery, MeQuery, graphene.ObjectType):
     secret = graphene.Field(SecretType, secret_id = graphene.Int())
 
     def resolve_secrets(self, info, **kwargs):
-        return Secret.objects.all()
+        if(info.context.user.is_authenticated()):
+            return Secret.objects.all()
+        else:
+            return []
     def resolve_secret(self, info, secret_id):
         return Secret.objects.get(id=secret_id)
 class SecretInputType(graphene.InputObjectType):
